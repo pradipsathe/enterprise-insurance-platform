@@ -1,19 +1,18 @@
 from .base import *
 import os
-from dotenv import load_dotenv
-load_dotenv()
 
-DEBUG = os.getenv("DEBUG", "False") == "True"
+
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("POSTGRES_DB"),
-        "USER": os.getenv("POSTGRES_USER"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-        "HOST": "localhost", 
+        "NAME": "insurance",
+        "USER": "postgres",
+        "PASSWORD": "Pradip@7373",
+        "HOST": "localhost",
         "PORT": "5432",
     }
 }
