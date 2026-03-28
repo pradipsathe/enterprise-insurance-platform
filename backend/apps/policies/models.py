@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from django.conf import settings
+from datetime import timedelta
 
 class PolicyCategory(models.Model):
 
@@ -63,3 +64,40 @@ class Policy(models.Model):
     def __str__(self):
         return self.title
     
+class CustomerPolicy(models.Model):
+    class status(models.TextChoices):
+        ACTIVE = "ACTIVE", "Active"
+        EXPIRED = "EXPIRED", "Expired"
+        CANCELLED = "CANCELLED", "Cancelled"
+        
+    id = models.UUIDField(
+        primary_key=True,
+        default= uuid.uuid4,
+        editable= False
+    )
+    
+    customer = models.ForeignKey(
+        "accounts.User",
+        on_delete=models.CASCADE,
+        related_name="purchased_policies"
+    )
+    
+    policy = models.ForeignKey(
+        Policy,
+        on_delete=models.CASCADE,
+        related_name="customers"
+    )
+    
+    start_date = models.DateField()
+    end_date = models.DateField()
+    
+    status = models.CharField(
+        max_length=20,
+        choices=status.choices,
+        default=status.ACTIVE
+    )
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.customer} - {self.policy}"

@@ -4,6 +4,7 @@ from .views import (
     PolicyCreateAPIView,
     PolicyUpdateAPIView,
     PolicyDeleteAPIView,
+    PurchasePolicyAPIView,
 )
 
 urlpatterns = [
@@ -11,4 +12,5 @@ urlpatterns = [
     path("create/", PolicyCreateAPIView.as_view()),
     path("<uuid:pk>/update/", PolicyUpdateAPIView.as_view()),
     path("<uuid:pk>/delete/", PolicyDeleteAPIView.as_view()),
+    path("purchase/", PurchasePolicyAPIView.as_view()),
 ]
