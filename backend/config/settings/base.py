@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_filters',
     'apps.accounts',
     'apps.policies',
+    'apps.rules',
 ]
 
 MIDDLEWARE = [
